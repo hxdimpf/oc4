@@ -278,8 +278,8 @@ class CacheLogsRepository
     public function insertLogSimple(int $cacheId, int $userId, int $type, string $date, string $text): int
     {
         $this->connection->executeStatement(
-            'INSERT INTO cache_logs (node, cache_id, user_id, type, date, text, text_html, text_htmledit, picture, needs_maintenance, listing_outdated)
-             VALUES (4, ?, ?, ?, ?, ?, 0, 0, 0, 0, 0)',
+            'INSERT INTO cache_logs (uuid, node, cache_id, user_id, type, date, text, text_html, text_htmledit, picture, needs_maintenance, listing_outdated, date_created, entry_last_modified, last_modified, log_last_modified, order_date)
+             VALUES (UUID(), 4, ?, ?, ?, ?, ?, 0, 0, 0, 0, 0, NOW(), NOW(), NOW(), NOW(), NOW())',
             [$cacheId, $userId, $type, $date, $text]
         );
         return (int)$this->connection->lastInsertId();
