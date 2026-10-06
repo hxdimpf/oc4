@@ -44,6 +44,23 @@ class UserRepository
         return $result ?: null;
     }
 
+    /**
+     * Home coordinates for a user, or null when unset (0/0) or unknown.
+     *
+     * @throws Exception
+     */
+    public function fetchHomeCoords(int $userId): ?array
+    {
+        $row = $this->connection->createQueryBuilder()
+            ->select('latitude', 'longitude')->from(self::TABLE)
+            ->where('user_id = :id')->setParameter('id', $userId)
+            ->executeQuery()->fetchAssociative();
+        if (!$row || ((float)$row['latitude'] === 0.0 && (float)$row['longitude'] === 0.0)) {
+            return null;
+        }
+        return ['lat' => (float)$row['latitude'], 'lon' => (float)$row['longitude']];
+    }
+
     public function search_by_user_id(int $userID): ?array
     {
         return $this->fetchOneById($userID);

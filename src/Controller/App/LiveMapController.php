@@ -19,14 +19,11 @@ class LiveMapController extends AbstractController
         private WaypointsRepository $waypointsRepository
     ) {}
 
+    /** Initial view (URL params, the user's home, or Hannover) is worked out by livemap.js. */
     #[Route('/livemap', name: 'livemap')]
     public function index(): Response
     {
-        return $this->render('app/maps/livemap.html.twig', [
-            'initLat'  => 52.3759,
-            'initLon'  => 9.7320,
-            'initZoom' => 13,
-        ]);
+        return $this->render('app/maps/livemap.html.twig');
     }
 
     #[Route('/api/caches/waypoints', name: 'api_caches_waypoints')]

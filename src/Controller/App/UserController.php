@@ -53,6 +53,14 @@ class UserController extends AbstractController
         return new JsonResponse(['items' => array_values($items)]);
     }
 
+    /** Logged-in user's home coordinates { lat, lon }, or null. */
+    #[Route('/api/user/home', name: 'api_user_home', methods: ['GET'])]
+    public function apiHome(): JsonResponse
+    {
+        $userId = $this->auth->getUserId();
+        return new JsonResponse($userId ? $this->userRepository->fetchHomeCoords($userId) : null);
+    }
+
     #[Route('/user/profile/{userID}', name: 'user_by_id')]
     public function search_by_user_id(int $userID): Response
     {

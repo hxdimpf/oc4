@@ -3,16 +3,6 @@
 {% block data_page %}cache{% endblock %}
 {% block data_map_js %}true{% endblock %}
 
-{% block after_body_start %}
-    {# Globals the map modules look up via window/free variables.
-       uniCacheWP starts empty; cache.js cooks the OC object into it after
-       fetching /api/cache/{wp}, then calls handleWPs(). #}
-    <script>
-        window.uniCacheWP       = [];
-        window.defaultZoom      = 14;
-    </script>
-{% endblock %}
-
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="/_frontend/vendor/tabulator/tabulator.min.css">
@@ -149,7 +139,7 @@
                     <div class="skeleton skeleton-block"></div>
                 </div>
 
-                <script id="gcState" type="application/json">{}</script>
+                <div id="gcState" hidden></div>
 
                 <div id="editCacheBtn" style="display:none; margin-bottom:8px;">
                     <a id="editCacheLink" class="btn btn-sm btn-outline-primary" href="#">{{ 'Edit cache' | trans }}</a>
