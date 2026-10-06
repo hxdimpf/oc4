@@ -407,7 +407,7 @@ function createWPTable() {
 
   const wps = gc.additionalWaypoints.map(wp => {
     const [lat, lon] = (wp.location || '').split('|');
-    const png = subtypeToPng[wp.typeId] ? `/_frontend/images/waypoints/${subtypeToPng[wp.typeId]}` : '';
+    const png = subtypeToPng[wp.typeId] ? `/images/waypoints/${subtypeToPng[wp.typeId]}` : '';
     return {
       myCoords: lat && lon ? coords2Dm(Number(lat), Number(lon)) : '',
       prefix:   wp.type?.substring(0, 2)?.toUpperCase() || '',
