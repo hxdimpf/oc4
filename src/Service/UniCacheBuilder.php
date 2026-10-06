@@ -74,10 +74,6 @@ class UniCacheBuilder
         $logs       = $data['logs'];
         $noteRow    = $data['noteRow'] ?? null;
         $region     = $data['region'] ?? null;
-        // Fallback — reverse geocode via Nominatim if no cached region
-        if (!$region && isset($cache['latitude'], $cache['longitude'])) {
-            $region = self::reverseGeocodeState((float)$cache['latitude'], (float)$cache['longitude']);
-        }
         $ownerStats = $data['ownerStats'] ?? ['found' => 0, 'hidden' => 0];
 
         $userId        = (int)($context['userId'] ?? 0);
